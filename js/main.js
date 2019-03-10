@@ -22,7 +22,6 @@ function highAndLow(numbers){
 }
 
 // ATM machines allow 4 or 6 digit PIN codes and PIN codes cannot contain anything but exactly 4 digits or exactly 6 digits.
-
 // If the function is passed a valid PIN string, return true, else return false.
 
 function validatePIN (pin) {
@@ -50,5 +49,34 @@ function validateForm() {
   var outId = document.getElementById("output");
   var x = document.forms["validatepin"]["fname"].value;
   outId.innerHTML = validatePIN(x)
+
+}
+// Create a function that returns the sum of the two lowest positive numbers given
+// an array of minimum 4 integers. No floats or empty arrays will be passed.
+// For example, when an array is passed like [19, 5, 42, 2, 77], the output should
+// be 7.
+
+function sumTwoSmallestNumbers(numbers) {
+  //Code here
+  numbers.sort(function(a, b) { return a - b;})
+  return numbers[0] + numbers[1];
+
+};
+
+// Write a function called which verifies that a coupon code is valid, the coupon
+// is not expired. A coupon is no more valid on the day AFTER the expiration date.
+// All dates will be passed as strings in this format: "MONTH DATE, YEAR".
+
+function checkCoupon(enteredCode, correctCode, currentDate, expirationDate){
+  if(enteredCode != correctCode) {
+    return false;
+  }
+  var dateNow = new Date(currentDate);
+  var dateCoupon = new Date(expirationDate);
+  if (dateNow > dateCoupon) {
+    return false;
+  }
+
+  return true;
 
 }
