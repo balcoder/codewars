@@ -68,7 +68,9 @@ function sumTwoSmallestNumbers(numbers) {
 // All dates will be passed as strings in this format: "MONTH DATE, YEAR".
 
 function checkCoupon(enteredCode, correctCode, currentDate, expirationDate){
-  if(enteredCode != correctCode) {
+ console.log(enteredCode + ' ' + correctCode + ' ' + currentDate + ' ' + expirationDate)
+ console.log(enteredCode.length);
+  if(enteredCode.toString().length < 3 || enteredCode.toString() != correctCode.toString() || enteredCode == '') {
     return false;
   }
   var dateNow = new Date(currentDate);
@@ -80,3 +82,18 @@ function checkCoupon(enteredCode, correctCode, currentDate, expirationDate){
   return true;
 
 }
+
+// create a function that when provided with a triplet, returns the index of the
+// numerical element that lies between the other two elements. The input to the
+// function will be an array of three distinct numbers (Haskell: a tuple).
+//For example:
+//gimme([2, 3, 1]) => 0
+
+var gimme = function (inputArray) {
+  // Implement this function
+  var copy = inputArray.slice(0);
+  inputArray.sort(function(a,b) {
+    return a - b;
+  });
+  return copy.indexOf(inputArray[1]);
+};
