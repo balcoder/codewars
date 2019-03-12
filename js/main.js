@@ -91,9 +91,40 @@ function checkCoupon(enteredCode, correctCode, currentDate, expirationDate){
 
 var gimme = function (inputArray) {
   // Implement this function
-  var copy = inputArray.slice(0);
-  inputArray.sort(function(a,b) {
+  var copy = inputArray.split('').map(x => Number.parseInt(x));
+  var orig = inputArray.split('').map(x => Number.parseInt(x));
+  orig.sort(function(a,b) {
     return a - b;
   });
-  return copy.indexOf(inputArray[1]);
+  console.log(inputArray);
+  return copy.indexOf(orig[1]);
 };
+//
+// You have to write a function printer_error which given a string will output the
+// error rate of the printer as a string representing a rational whose numerator is
+// the number of errors and the denominator the length of the control string. Don't
+// reduce this fraction to a simpler expression.
+// The string has a length greater or equal to one and contains only letters from
+// ato z.
+// #Example:
+// s="aaabbbbhaijjjm"
+// error_printer(s) => "0/14"
+
+function printerError(s) {
+    // your code
+    var colors = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"];
+    var errCount = 0;
+    var strArr = s.split('');
+    var inputCount = strArr.length;
+    strArr.forEach(function(el){
+      if(colors.indexOf(el) == -1) {
+        errCount++;
+      }
+    });
+    return errCount +'\/'+ inputCount;
+}
+
+// best soulution
+// function printerError(s) {
+//     return s.match(/[^a-m]/g).length + "/" + s.length;
+// }
