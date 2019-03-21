@@ -128,3 +128,31 @@ function printerError(s) {
 // function printerError(s) {
 //     return s.match(/[^a-m]/g).length + "/" + s.length;
 // }
+
+You are given an array strarr of strings and an integer k. Your task is to
+return the first longest string consisting of k consecutive strings taken in
+the array.
+Example:
+longest_consec(["zone", "abigail", "theta", "form", "libe", "zas", "theta",
+"abigail"], 2) --> "abigailtheta"
+
+n being the length of the string array, if n = 0 or k > n or k <= 0 return "".
+
+function longestConsec(strarr, k) {
+    // your code
+    if(strarr.length == 0 || k > strarr.length || k <= 0) {
+      return "";
+    }
+    var longest = "";
+    var curLongest = 0;
+    strarr.forEach(function(el, i, arr){
+      var arrLenght = arr.lenght;
+      if(i != arrLength-1) {
+      var joined = el + arr[i + 1];
+      var length = (el.length + arr[i + 1]).length;
+      curLongest = (curLongest >= length) ? curLongest : length;
+      }
+    ));
+    
+
+}
