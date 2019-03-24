@@ -328,3 +328,174 @@ function hasCertainValue(arr, key, searchValue){
         return (ob.hasOwnProperty(key) && ob[key] === searchValue)
     })
 }
+
+// Array.reduce methods
+
+/*
+Write a function called extractValue which accepts an array of objects and a key and returns a new array with the value of each object at the key.
+
+Examples:
+    var arr = [{name: 'Elie'}, {name: 'Tim'}, {name: 'Matt'}, {name: 'Colt'}]
+    extractValue(arr,'name') // ['Elie', 'Tim', 'Matt', 'Colt']
+*/
+
+function extractValue(arr, key){
+    return arr.reduce(function(accumulator, next){
+        if(next[key]){
+         accumulator.push(next[key]);
+         return accumulator;
+        } else return accumulator;
+    }, [])
+}
+
+
+/*
+Write a function called vowelCount which accepts a string and returns an object with the keys as the vowel and the values as the number of times the vowel appears in the string. This function should be case insensitive so a lowercase letter and uppercase letter should count
+
+Examples:
+    vowelCount('Elie') // {e:2,i:1};
+    vowelCount('Tim') // {i:1};
+    vowelCount('Matt') // {a:1})
+    vowelCount('hmmm') // {};
+    vowelCount('I Am awesome and so are you') // {i: 1, a: 4, e: 3, o: 3, u: 1};
+*/
+
+function vowelCount(str){
+   var vowels = ["a","e","i","o","u"];
+   var strArr = str.toLowerCase().split('');
+   return strArr.reduce(function(acc, next){
+       if(vowels.indexOf(next) !== -1){
+           if(acc[next]){
+               acc[next]++
+               return acc;
+           } else {
+               acc[next] = 1;
+               return acc;
+           }
+       }
+       return acc;
+   }, {})
+}
+
+/*
+Write a function called addKeyAndValue which accepts an array of objects and returns the array of objects passed to it with each object now including the key and value passed to the function.
+
+Examples:
+    var arr = [{name: 'Elie'}, {name: 'Tim'}, {name: 'Matt'}, {name: 'Colt'}];
+
+    addKeyAndValue(arr, 'title', 'Instructor') //
+      [
+        {title: 'Instructor', name: 'Elie'},
+        {title: 'Instructor', name: 'Tim'},
+        {title: 'Instructor', name: 'Matt'},
+        {title: 'Instructor', name: 'Colt'}
+       ]
+*/
+
+function addKeyAndValue(arr, key, value){
+    return arr.reduce(function(acc , next){
+        next[key] = value;
+        return acc;
+    },arr)
+}
+
+
+/*
+Write a function called partition which accepts an array and a callback and returns an array with two arrays inside of it. The partition function should run the callback function on each value in the array and if the result of the callback function at that specific value is true, the value should be placed in the first subarray. If the result of the callback function at that specific value is false, the value should be placed in the second subarray.
+
+Examples:
+
+    function isEven(val){
+        return val % 2 === 0;
+    }
+
+    var arr = [1,2,3,4,5,6,7,8];
+
+    partition(arr, isEven) // [[2,4,6,8], [1,3,5,7]];
+
+    function isLongerThanThreeCharacters(val){
+        return val.length > 3;
+    }
+
+    var names = ['Elie', 'Colt', 'Tim', 'Matt'];
+
+    partition(names, isLongerThanThreeCharacters) // [['Elie', 'Colt', 'Matt'], ['Tim']]
+*/
+
+function partition(arr, callback){
+    return arr.reduce(function(acc, next){
+        if(callback(next)) {
+            acc[0].push(next);
+        } else {
+            acc[1].push(next);
+        }
+        return acc;
+    },[[],[]])
+}
+
+// closures
+/*
+Write a function called specialMultiply which accepts two parameters. If the function is passed both parameters, it should return the product of the two. If the function is only passed one parameter - it should return a function which can later be passed another parameter to return the product. You will have to use closure and arguments to solve this.
+
+Examples:
+
+    specialMultiply(3,4); // 12
+    specialMultiply(3)(4); // 12
+    specialMultiply(3); // function(){}....
+*/
+
+function specialMultiply(a,b){
+    if(arguments.length === 2 ) {
+        return a * b;
+    } else {
+        return function(num){
+
+            return a * num;
+        }
+    }
+
+}
+
+/*
+Write a function called guessingGame which takes in one parameter amount. The function should return another function that takes in a parameter called guess. In the outer function, you should create a variable called answer which is the result of a random number between 0 and 10 as well as a variable called guesses which should be set to 0.
+
+In the inner function, if the guess passed in is the same as the random number (defined in the outer function) - you should return the string "You got it!". If the guess is too high return "Your guess is too high!" and if it is too low, return "Your guess is too low!". You should stop the user from guessing if the amount of guesses they have made is greater than the initial amount passed to the outer function.
+
+You will have to make use of closure to solve this problem.
+
+Examples (yours might not be like this, since the answer is random every time):
+
+    var game = guessingGame(5)
+    game(1) // "You're too low!"
+    game(8) // "You're too high!"
+    game(5) // "You're too low!"
+    game(7) // "You got it!"
+    game(1) // "You are all done playing!"
+
+    var game2 = guessingGame(3)
+    game2(5) // "You're too low!"
+    game2(3) // "You're too low!"
+    game2(1) // "No more guesses the answer was 0"
+    game2(1) // "You are all done playing!"
+*/
+
+function guessingGame(amount){
+    var answer = Math.floor(Math.random() * 11);
+    var counter = 0;
+    return function(guess){
+        if(counter === amount){
+            return "You are all done playing!";
+        }
+        counter++;
+        if(guess < answer){
+            return "You're too low!";
+        } else if(guess > answer) {
+            return "You're too high!";
+        } else {
+            counter = answer;
+            return "You got it!";
+        }
+
+
+    };
+}
