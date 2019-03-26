@@ -505,7 +505,7 @@ function guessingGame(amount){
 Write a function called arrayFrom which converts an array-like-object into an array.
 
 Examples:
-    var divs = document.getElementsByTagName('divs');
+    var divs = document.getElementsByTagName('div');
     divs.reduce // undefined
     var converted = arrayFrom(divs);
     converted.reduce // function(){}....
@@ -518,7 +518,8 @@ function arrayFrom(arrayLikeObject){
 }
 
 /*
-// Write a function called sumEvenArguments which takes all of the arguments passed to a function and returns the sum of the even ones.
+// Write a function called sumEvenArguments which takes all of the arguments
+// passed to a function and returns the sum of the even ones.
 
 Examples:
     sumEvenArguments(1,2,3,4) // 6
@@ -528,11 +529,15 @@ Examples:
 
 function sumEvenArguments(){
     var newArr = [].slice.apply(arguments);
-    return newArr.filter(num => num % 2 === 0).reduce((accumulator, currentValue) => accumulator + currentValue);
+    return newArr.filter(num => num % 2 === 0).reduce((accumulator,
+       currentValue) => accumulator + currentValue);
 }
 
 /*
-Write a function called invokeMax which accepts a function and a maximum amount. invokeMax should return a function that when called increments a counter. If the counter is greater than the maximum amount, the inner function should return "Maxed Out"
+Write a function called invokeMax which accepts a function and a maximum amount.
+invokeMax should return a function that when called increments a counter. If the
+counter is greater than the maximum amount, the inner function should return
+"Maxed Out"
 
 Examples:
 
@@ -558,7 +563,10 @@ function invokeMax(fn, num){
 }
 
 /*
-Write a function called once which accepts two parameters, a function and a value for the keyword 'this'. Once should return a new function that can only be invoked once, with the value of the keyword this in the function set to be the second parameter.
+Write a function called once which accepts two parameters, a function and a
+value for the keyword 'this'. Once should return a new function that can only be
+invoked once, with the value of the keyword this in the function set to be the
+second parameter.
 
 Examples:
 
@@ -596,7 +604,12 @@ function once(fn, thisArg){
 // BONUSES!
 
 /*
-Write a function called bind which accepts a function and a value for the keyword this. Bind should return a new function that when invoked, will invoke the function passed to bind with the correct value of the keyword this. HINT - if you pass more than two parameters to bind, those parameters should be included as parameters to the inner function when it is invoked. You will have to make use of closure!
+Write a function called bind which accepts a function and a value for the
+keyword this. Bind should return a new function that when invoked, will invoke
+the function passed to bind with the correct value of the keyword this. HINT -
+if you pass more than two parameters to bind, those parameters should be
+included as parameters to the inner function when it is invoked. You will have
+to make use of closure!
 
 Examples:
 
@@ -685,4 +698,90 @@ function flip(fn, thisArg){
         var allArgs = outerArgs.concat(innerArgs).slice(0, fn.length)
         return fn.apply(thisArg, allArgs.reverse())
     }
+}
+
+
+// Constructor functions
+
+/// 1 - Create a constructor function for a Person. Each person should have a firstName, lastName, favoriteColor, favoriteNumber)
+
+function Person(firstName, lastName, favoriteColor, favoriteNumber){
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.favoriteColor = favoriteColor;
+    this.favoriteNumber = favoriteNumber;
+    this.family = [];
+}
+
+Person.prototype.fullName = function(){
+    return this.firstName + " "  + this.lastName;
+}
+
+Person.prototype.addToFamily = function(member){
+    var checkObj = this.family.filter(el => el === member);
+    if(member instanceof Person && checkObj.length === 0) {
+                this.family.push(member);
+    }
+    return this.family.length;
+}
+
+
+
+/* 2 - Add a function on the Person.prototype called fullName that returns the firstName and lastName property of an object created by the Person constructor concatenated together.
+
+Examples:
+    var person = new Person("Elie", "Schoppik", "purple", 34)
+    person.fullName() // "Elie Schoppik"
+
+*/
+
+// 3 -  Add a property on the object created from the Person function called family which is an empty array. This will involve you going back and adding an additional line of code to your Person constructor you previously created in exercise 1.
+
+/* 4 - Add a function on the Person.prototype called addToFamily which adds an object constructed from the Person constructor to the family array. To make sure that the object you are adding is an object construced from the Person constructor (HINT - take a look at the instanceof keyword). Make sure that your family array does not include duplicates! This method should return the length of the family array.
+
+
+Examples:
+
+    var person = new Person("Elie", "Schoppik", "purple", 34)
+    var anotherPerson = new Person()
+    person.addToFamily(anotherPerson); // 1
+    person.addToFamily(anotherPerson); // 1
+    person.family.length // 1
+
+    person.addToFamily("test"); // 1
+    person.addToFamily({}); // 1
+    person.addToFamily([]); // 1
+    person.addToFamily(false); // 1
+    person.family.length // 1
+*/
+
+// PART II
+
+// 1 - Implement your own version of Array.prototype.map. The function should accept a callback and return a new array with the result of the callback for each value in the array.
+
+Array.prototype.map = function(callback){
+  var newArr = [];
+  for(var i = 0; i < this.length; i++){
+    newArr.push(callback(this[i], i, this))
+  }
+  return newArr;
+}
+
+/* 2 - Implement a function called reverse that reverses a string and place it on the String.prototype
+
+Examples:
+    "test".reverse() // "tset"
+    "tacocat".reverse() // "tacocat"
+*/
+// function reverse(str) {
+//     var strArr = str.split("");
+//     return strArr.reverse().join('');
+// }
+
+String.prototype.reverse = function(){
+  var newStr = '';
+  for(var i = this.length -1; i >= 0; i--){
+    newStr += this[i]
+  }
+  return newStr;
 }
