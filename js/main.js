@@ -785,3 +785,188 @@ String.prototype.reverse = function(){
   }
   return newStr;
 }
+
+
+
+// Portotypal Inheritance
+
+function Person(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+Person.prototype.sayHi = function(){
+    return "Hi " + this.firstName + " " + this.lastName;
+}
+
+function Student(firstName, lastName) {
+    return Person.apply(this, arguments)
+}
+// set the Student.prototype to  a copy of the __proto__ of Person
+Student.prototype = Object.create(Person.prototype);
+
+// reseting  the constructor
+Student.prototype.constructor = Student;
+
+Student.prototype.status = function(){
+    return "I'm a student";
+}
+
+var dude = new Person("dude", "Maximus");
+
+var john = new Student("John", "Doe");
+
+console.log(john.status());
+
+console.log(john.sayHi());
+
+console.log(dude.status());
+
+////////////////////////////////////////////////////////////////////////////////
+// Inheritance
+////////////////////////////////////////////////////////////////////////////////
+
+// 1 - Create a constructor function for a Vehicle. Each vehicle should have a
+// make, model and year property.
+function Vehicle(make, model, year) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+
+}
+
+// 2 - Add a function to the Vehicle prototype called start which returns the
+// string "VROOM!"
+Vehicle.prototype.start = function() {
+    return "VROOM!";
+}
+
+
+// 3 - Add a function to the Vehicle prototype called toString which returns the
+// string "The make, model, and year are" concatenated with the make, model and
+// year property
+
+/* Examples
+    var vehicle = new Vehicle("Tractor", "John Deere", 1999)
+    vehicle.toString() // 'The make, model, and year are Tractor John Deere 1999'
+*/
+Vehicle.prototype.toString = function() {
+    return "The make, model, and year are " + this.make + " " + this.model + " " + this.year;
+}
+
+// 4 - Create a constructor function for a Car. Each object created from the Car
+// function should also have a make, model, and year and a property called
+// numWheels which should be 4. The Car prototype should inherit all of the
+// methods from the Vehicle prototype
+function Car(make, model, year) {
+    Vehicle.apply(this, arguments);
+    this.numWheels = 4;
+}
+
+Car.prototype = Object.create(Vehicle.prototype);
+Car.prototype.constructor = Car;
+
+// 5 - Create a constructor function for a Motorcycle. Each object created from
+// the Motorcycle function should also have a make, model, and year and a
+// property called numWheels which should be 2. The Motorcycle prototype should
+// inherit all of the methods from the Vehicle prototype
+
+function Motorcycle(make, model, year) {
+    Vehicle.apply(this, arguments);
+    this.numWheels = 2;
+}
+
+Motorcycle.prototype = Object.create(Vehicle.prototype);
+Motorcycle.prototype.constructor = Motorcycle;
+
+
+// Arrow functions
+/* 1 - Refactor the following code to use ES2015 arrow functions - make sure your function is also called tripleAndFilter
+
+    function tripleAndFilter(arr){
+      return arr.map(function(value){
+        return value * 3;
+      }).filter(function(value){
+        return value % 5 === 0;
+      })
+    }
+
+*/
+
+var tripleAndFilter = (arr) => arr.map(value => value * 3).filter(value => value % 5 === 0);
+
+
+
+/* 2 - Refactor the following code to use ES2015 arrow functions. Make sure your function is also called doubleOddNumbers
+
+    function doubleOddNumbers(arr){
+        return arr.filter(function(val){
+            return val % 2 !== 0;
+        }).map(function(val){
+            return val *2;
+        })
+    }
+
+*/
+var doubleOddNumbers = (arr) => arr.filter(val => val % 2 !== 0).map(val => val * 2);
+
+
+
+/* 3 - Refactor the following code to use ES2015 arrow functions. Make sure your function is also called mapFilterAndReduce.
+
+    function mapFilterAndReduce(arr){
+      return arr.map(function(val){
+        return val.firstName
+      }).filter(function(val){
+        return val.length < 5;
+      }).reduce(function(acc,next){
+        acc[next] = next.length
+        return acc;
+      }, {})
+    }
+*/
+var mapFilterAndReduce = (arr) =>
+     arr
+    .map(val => val.firstName)
+    .filter(val => val.length < 5)
+    .reduce((acc, next) => {
+        acc[next] = next.length;
+        return acc;
+    }, {})
+
+
+
+/* 4 - Write a function called createStudentObj which accepts two parameters, firstName and lastName and returns an object with the keys of firstName and lastName with the values as the parameters passed to the function.
+
+Example:
+    createStudentObj('Elie', 'Schoppik') // {firstName: 'Elie', lastName: 'Schoppik'}
+*/
+var createStudentObj = (firstName, lastName) => ({firstName: firstName, lastName: lastName});
+
+
+
+/* 5 - Given the following code:
+
+
+Refactor this code to use arrow functions to make sure that in 1000 milliseconds you console.log 'Hello Colt'
+
+    var instructor = {
+      firstName: "Colt",
+      sayHi: function(){
+        setTimeout(function(){
+          console.log('Hello ' + this.firstName)
+        },1000)
+      }
+    }
+
+*/
+var instructor = {
+	firstName:"Des",
+	sayHi: function(){
+		setTimeout(() => {
+			console.log(this === instructor);
+			console.log('Hello ' + this.firstName)
+		}, 1000)
+
+    }
+}
