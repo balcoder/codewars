@@ -1119,7 +1119,10 @@ function bind(fn, thisArg, ...outerArgs){
 //*****************************************************************************
 //Destructuring
 /*
-Write a function called displayStudentInfo which accepts an object and returns the string "Your full name is" concatenated with the value of the first key and a space and then the value of the last key. See if you can destructure this object inside of the function.
+Write a function called displayStudentInfo which accepts an object and returns
+the string "Your full name is" concatenated with the value of the first key and
+a space and then the value of the last key. See if you can destructure this
+object inside of the function.
 
 Examples:
     displayStudentInfo({first: 'Elie', last:'Schoppik'}) // 'Your full name is Elie Schoppik')
@@ -1131,7 +1134,11 @@ function displayStudentInfo(obj){
 }
 
 /*
-Write a function called printFullName which accepts an object and returns the string "Your full name is" concatenated with the value of the first key and a space and then the value of the last key. See if you can destructure this object DIRECTLY from the parameters. The output of the printFullName function should be the exact same as the displayStudentInfo function.
+Write a function called printFullName which accepts an object and returns the
+string "Your full name is" concatenated with the value of the first key and a
+space and then the value of the last key. See if you can destructure this object
+DIRECTLY from the parameters. The output of the printFullName function should be
+the exact same as the displayStudentInfo function.
 
 Examples:
     printFullName({first: 'Elie', last:'Schoppik'}) // 'Your full name is Elie Schoppik'
@@ -1166,7 +1173,9 @@ function createStudent({likesES2015 = true, likesJavaScript = true} = {}){
 
 }
 /*
-Write a function called reverseArray which accepts an array and returns the array with all values reversed. See if you can do this without creating a new array!
+Write a function called reverseArray which accepts an array and returns the
+array with all values reversed. See if you can do this without creating a new
+array!
 
 Examples:
     reverseArray([1,2,3,4,5]) // [5,4,3,2,1]
@@ -1185,15 +1194,15 @@ function reverseArray(arr){
 }
 
 
-// Inheritance and Super
+/* Inheritance and Super
 
-// 1 - Create a class for for a Vehicle. Each vehicle should have a make, model and year property.
+ 1 - Create a class for for a Vehicle. Each vehicle should have a make, model
+and year property.
+ 2 - Add an instance method called start which returns the string "VROOM!"
+ 3 - Add an instance method called toString which returns the string "The
+ make, model, and year are" concatenated with the make, model and year property
 
-// 2 - Add an instance method called start which returns the string "VROOM!"
-
-// 3 - Add an instance method called toString which returns the string "The make, model, and year are" concatenated with the make, model and year property
-
-/* Examples
+ Examples
     var vehicle = new Vehicle("Tractor", "John Deere", 1999)
     vehicle.toString() // 'The make, model, and year are Tractor John Deere 1999'
 */
@@ -1211,7 +1220,10 @@ class Vehicle {
   }
 }
 
-// 4 - Create a class for a Car. Each object created from the Car function should also have a make, model, and year and a property called numWheels which should be 4. The Car prototype should inherit all of the methods from the Vehicle prototype
+// 4 - Create a class for a Car. Each object created from the Car function
+//should also have a make, model, and year and a property called numWheels which
+//should be 4. The Car prototype should inherit all of the methods from the
+//Vehicle prototype
 
 class Car extends Vehicle {
   constructor() {
@@ -1221,7 +1233,10 @@ class Car extends Vehicle {
   }
 }
 
-// 5 - Create a class for a Motorcycle. Each object created from the Motorcycle function should also have a make, model, and year and a property called numWheels which should be 2. The Motorcycle prototype should inherit all of the methods from the Vehicle prototype
+// 5 - Create a class for a Motorcycle. Each object created from the Motorcycle
+//function should also have a make, model, and year and a property called
+//numWheels which should be 2. The Motorcycle prototype should inherit all of
+//the methods from the Vehicle prototype
 
 class Motorcycle extends Vehicle {
   constructor() {
@@ -1238,7 +1253,10 @@ class Motorcycle extends Vehicle {
 class MessageBoard {
 
     /*
-    In your constructor method, you should assign two properties for each object created from the MessageBoard class. The first should be a property called messages which is an empty Map, and the second is a property called id which has a value of 1.
+    In your constructor method, you should assign two properties for each object
+     created from the MessageBoard class. The first should be a property called
+     messages which is an empty Map, and the second is a property called id
+     which has a value of 1.
 
     var m = new MessageBoard
 
@@ -1256,7 +1274,12 @@ class MessageBoard {
 
     /*
 
-    Add a method called addMessage which accepts a string. The function should add a key and value to the messages map with a key of whatever the value of this.id is and a value of whatever the string is that is passed to the function. The function should return the object created from the class so that the method can be chained. (HINT - to implement the last part, make sure to return this).
+    Add a method called addMessage which accepts a string. The function should
+    add a key and value to the messages map with a key of whatever the value of
+    this.id is and a value of whatever the string is that is passed to the
+    function. The function should return the object created from the class so
+    that the method can be chained. (HINT - to implement the last part, make
+    sure to return this).
 
     var m = new MessageBoard
     m.addMessage('hello');
@@ -1272,7 +1295,10 @@ class MessageBoard {
 	}
 
     /*
-    Add a method called findMessageById which accepts a number and returns the message in the messages map with the same key as the number passed to the function. If the key is not found in the messages map, the function should return undefined.
+    Add a method called findMessageById which accepts a number and returns the
+    message in the messages map with the same key as the number passed to the
+    function. If the key is not found in the messages map, the function should
+    return undefined.
 
 
     var m = new MessageBoard
@@ -1291,7 +1317,10 @@ class MessageBoard {
 	}
 
     /*
-    Add a method called findMessageByValue which accepts a string and returns the message in the messages map with the same value as the string passed to the function. If the value is not found in the messages map, the function should return undefined.
+    Add a method called findMessageByValue which accepts a string and returns
+    the message in the messages map with the same value as the string passed to
+    the function. If the value is not found in the messages map, the function
+    should return undefined.
 
     var m = new MessageBoard
     m.addMessage('hello!')
@@ -1316,7 +1345,8 @@ class MessageBoard {
     }
 
     /*
-    Add a method called removeMessage which accepts a number and removes a message in the messages map with a key of the number passed to the function.
+    Add a method called removeMessage which accepts a number and removes a
+    message in the messages map with a key of the number passed to the function.
 
     var m = new MessageBoard
     m.addMessage('hello!')
@@ -1334,7 +1364,8 @@ class MessageBoard {
     }
 
     /*
-    Add a method called numberOfMessages which returns the number of keys in the messages map
+    Add a method called numberOfMessages which returns the number of keys in the
+    messages map
 
     var m = new MessageBoard
     m.addMessage('hello!')
@@ -1348,7 +1379,8 @@ class MessageBoard {
     }
 
     /*
-    Add a method called messagesToArray which returns an array of all of the values in the messages map
+    Add a method called messagesToArray which returns an array of all of the
+    values in the messages map
 
     var m = new MessageBoard
     m.addMessage('hello!')
@@ -1374,7 +1406,8 @@ function uniqueValues(arr){
 
 /*
 
-Write a function called hasDuplicates which accepts an array and returns true if there are duplicate values in the array, otherwise it should return false.
+Write a function called hasDuplicates which accepts an array and returns true if
+there are duplicate values in the array, otherwise it should return false.
 
 hasDuplicates([1,1,2,2,2,3,3,3,3,4,4,4,5,5,6]) // true
 hasDuplicates([1,2,3,4,5,6]) // false
@@ -1391,7 +1424,9 @@ function hasDuplicates(arr){
 
 /*
 
-Write a function called countPairs which accepts an array of numbers and a number. The function should return the number of unique pairs (two numbers) that sum up to the number passed to the function.
+Write a function called countPairs which accepts an array of numbers and a
+number. The function should return the number of unique pairs (two numbers) that
+sum up to the number passed to the function.
 
 countPairs([8,2,6,4,10,0],10) // 3
 countPairs([8,2],10) // 1
@@ -1412,4 +1447,24 @@ function countPairs(arr, num) {
     }
   }
   return count;
+}
+
+
+// Prove randomness of Math.random
+function proveRandom() {
+	var one = 0;
+	var two = 0;
+	var three = 0;
+	for(var i = 1; i < 1000000000; i++){
+		var num = Math.floor(Math.random() * 3) + 1;
+		switch(num){
+            case 1 : one++
+			break;
+			case 2 : two++
+			break;
+			case 3 : three++
+			break;
+		}
+	}
+	console.log(`One :${one}, Two :${two}, Three :${three}`)
 }
